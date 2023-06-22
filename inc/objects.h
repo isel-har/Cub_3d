@@ -132,8 +132,8 @@ typedef struct s_cub
 	double	d_p_dist;
 	double	p_minix;
 	double	p_miniy;
-	double	mini_nxtx;
-	double	mini_nxty;
+	int		calc_x;
+	int 	calc_y;
 	int		door_index;
 	int		door_row;
 	int     ROT_TO_RIGHT;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/22 16:15:23 by isel-har          #+#    #+#             */
+/*   Updated: 2023/06/22 16:18:12 by isel-har         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 t_tx	*depends_side(double rayangle, t_cub *cub)
@@ -9,7 +21,7 @@ t_tx	*depends_side(double rayangle, t_cub *cub)
 		tx = cub->door_txt;
 	else if (cub->hori_line == true)
 	{
-		if (rayangle > M_PI  && rayangle < 2 * M_PI)
+		if (rayangle > M_PI && rayangle < 2 * M_PI)
 			tx = cub->south_txt;
 		else
 			tx = cub->north_txt;
@@ -24,15 +36,15 @@ t_tx	*depends_side(double rayangle, t_cub *cub)
 	return (tx);
 }
 
-unsigned int	get_color_in_texture(t_cub *cub, int Y, double w_height, t_tx *tx)
+unsigned int	get_color_in_texture(t_cub *cub, int y2, double w_h, t_tx *tx)
 {
 	int				x;
 	int				y;
 	unsigned int	color;
 
-	y = Y + (w_height / 2) - (WIN_HEIGTH / 2);
+	y = y2 + (w_h / 2) - (WIN_HEIGTH / 2);
 	x = (cub->x_offset / 32) * tx->width;
-	y = y * (tx->height / w_height);
+	y = y * (tx->height / w_h);
 	color = tx->data[abs((y * tx->height) + x)];
 	return (color);
 }
@@ -40,7 +52,7 @@ unsigned int	get_color_in_texture(t_cub *cub, int Y, double w_height, t_tx *tx)
 void	put_rect(double rayangle, int x, t_cub *cub, double plan_height)
 {
 	int				top_pixel;
-	int 			bottom_pixel;
+	int				bottom_pixel;
 	unsigned int	color;
 	t_tx			*tx;
 
@@ -54,7 +66,7 @@ void	put_rect(double rayangle, int x, t_cub *cub, double plan_height)
 	while (top_pixel < bottom_pixel)
 	{
 		color = get_color_in_texture(cub, top_pixel, plan_height, tx);
-		my_mlx_pixel_put(cub, x , top_pixel, color);
+		my_mlx_pixel_put(cub, x, top_pixel, color);
 		top_pixel++;
 	}
 }
@@ -68,11 +80,11 @@ void	render_walls(double rayangle, t_cub *cub, int i)
 
 	newang = cub->angle - rayangle;
 	newang = set_angle(newang);
-	raydistance = cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y)\
+	raydistance = cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) \
 	* cos(newang);
 	if (round(raydistance) == 0)
 		raydistance = 1;
 	plan_dist = (WIN_WIDTH / 2) / tan(FOV_AGL / 2);
-	proj_plan_h = (S_SIZE  / raydistance) * plan_dist;
+	proj_plan_h = (S_SIZE / raydistance) * plan_dist;
 	put_rect(rayangle, i, cub, proj_plan_h);
 }

@@ -35,12 +35,6 @@ void	mini_player(t_cub *cub, int x, int y, int size)
 		}
 		j += 1;
 	}
-	if (size == 3)
-	{
- 		cub->mini_nxtx = (cub->p_x + cos(cub->angle) * 20) * SCALE_SIZE;
-		cub->mini_nxty = (cub->p_y + sin(cub->angle) * 20) * SCALE_SIZE;
- 		DDA(cub);
-	}
 }
 
 void	player_newpos(t_cub *cub, int key)

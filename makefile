@@ -13,10 +13,12 @@ SRS=mandatory/castrays.c      mandatory/ft_split.c      mandatory/moves2.c      
 	mandatory/ft_itoa.c       mandatory/moves1.c        mandatory/parsing4.c $(GNL)
 OJS= $(SRS:.c=.o)
 #----------------------bonus part----------------------------------------
-BSRS=bonus/castrays.c      bonus/ft_itoa.c       bonus/intersections.c bonus/parsing2.c      bonus/surfaces.c\
-	bonus/convert.c       bonus/ft_split.c      bonus/main.c          bonus/parsing3.c      bonus/tools.c\
-	bonus/creation.c      bonus/ft_split2.c     bonus/new_texture.c   bonus/parsing4.c      bonus/zoomed_map.c\
-	bonus/free_elements.c bonus/init.c          bonus/parsing1.c      bonus/player_mov.c $(GNL)
+BSRS= bonus/castrays.c       bonus/ft_split.c       bonus/mouse.c          bonus/player_mov.c\
+	bonus/check_sides.c    bonus/ft_split2.c      bonus/new_texture.c    bonus/put_maps.c\
+	bonus/convert.c        bonus/init.c           bonus/parsing1.c       bonus/surfaces.c\
+	bonus/creation.c       bonus/intersections.c  bonus/parsing2.c       bonus/tools.c\
+	bonus/free_elements.c  bonus/intersections2.c bonus/parsing3.c		bonus/gun.c\
+	bonus/ft_itoa.c        bonus/main.c           bonus/parsing4.c $(GNL)
 BOJS= $(BSRS:.c=.o)
 #-------------------------rules-------------------------------------------
 all: $(NAME)

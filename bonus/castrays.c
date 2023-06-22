@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:36:02 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/21 14:38:34 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:16:15 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ bool	hit_door(t_cub *cub, char c)
 
 void	catch_door(t_cub *cub)
 {
-	if (cub->vert_line == true) 
+	if (cub->vert_line == true)
 	{
 		if (hit_door(cub, 'v'))
 		{
 			cub->door = true;
 			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 6)
 			{
-				cub->door_x =  cub->next_x;
+				cub->door_x = cub->next_x;
 				cub->door_y = cub->next_y;
 			}
 		}
@@ -50,34 +50,10 @@ void	catch_door(t_cub *cub)
 			cub->door = true;
 			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 6)
 			{
-				cub->door_x =  cub->next_x;
+				cub->door_x = cub->next_x;
 				cub->door_y = cub->next_y;
 			}
 		}
-	}
-}
-
-void DDA(t_cub *cub)
-{	
-	t_ray	ray;
-
-	ray.dx = cub->mini_nxtx - cub->p_minix;
-	ray.dy = cub->mini_nxty - cub->p_miniy;
-	if (abs(ray.dx) > abs(ray.dy))
-		ray.steps = abs(ray.dx);
-	else
-		ray.steps = abs(ray.dy);
-	ray.Xinc = ray.dx / ray.steps;
-	ray.Yinc = ray.dy / ray.steps;
-	ray.X = cub->p_minix;
-	ray.Y = cub->p_miniy;
-    while (ray.steps >= 0)
-	{
-        my_mlx_pixel_put(cub, round(ray.X), \
-		round(ray.Y), 0xff0000);
-        ray.X += ray.Xinc;
-        ray.Y += ray.Yinc;
-		ray.steps--;
 	}
 }
 
@@ -91,7 +67,7 @@ double	set_angle(double angle)
 }
 
 void	cast_all_rays(t_cub *cub)
-{  
+{
 	int		i;
 	double	rayangle;
 

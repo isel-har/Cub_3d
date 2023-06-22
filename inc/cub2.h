@@ -26,6 +26,8 @@ int		ft_move(int keycode, t_cub *cub);
 bool	right_side(double rayangle);
 int	    player_up(double angle);
 int	    is_wall(t_cub *cub, double x, double y);
+void    horizontal_intersection(double rayangle, t_cub *cub);
+void	vertical_intersection(double rayangle, t_cub *cub);
 void	first_horizontal_intersection(double rayangle, t_cub *cub);
 void	next_horizontal_intersection(double rayangle, t_cub *cub);
 void	first_ver_intersect(double rayangle, t_cub *cub);
@@ -36,5 +38,8 @@ void	init_keys(t_cub *cub);
 void	player_newpos(t_cub *cub, int key);
 bool	check_sides(t_cub *cub, int xtmp, int ytmp);
 void    gun_img(t_cub *cub);
-
+int   	mouse(int x, int y, t_cub *cub);
+void	gun_sprite(t_cub *cub);
+int	    gun_key(int key, int x, int y, t_cub *cub);
+int	    gun_animation(t_cub *cub);
 #endif
