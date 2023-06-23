@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 18:04:41 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/21 11:42:01 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:23:05 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	init_values(t_cub *cub)
 	cub->x_map = 0;
 	cub->door_index = 0;
 	cub->door_row = 0;
+	cub->fov = 60 * (M_PI / 180);
 	cub->data = ft_malloc(sizeof(t_data));
 	while (cub->map_2d[cub->y_map])
 	{

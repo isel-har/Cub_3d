@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:36:02 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/22 17:16:15 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:21:27 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	cast_all_rays(t_cub *cub)
 	int		i;
 	double	rayangle;
 
-	rayangle = cub->angle - (FOV_AGL / 2);
+	rayangle = cub->angle - (cub->fov / 2);
 	rayangle = set_angle(rayangle);
 	i = 0;
 	while (i < NUM_RAYS)
@@ -81,7 +81,7 @@ void	cast_all_rays(t_cub *cub)
 		if ((int)rayangle == (int)cub->angle && cub->door)
 			cub->d_p_dist = cal_distance(cub->p_x, cub->p_y, \
 			cub->next_x, cub->next_y);
-		rayangle += FOV_AGL / (double)NUM_RAYS;
+		rayangle += cub->fov / (double)NUM_RAYS;
 		rayangle = set_angle(rayangle);
 		render_walls(rayangle, cub, i);
 		i += 1;

@@ -1,99 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_mov.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 11:40:36 by isel-har          #+#    #+#             */
+/*   Updated: 2023/06/23 11:48:02 by isel-har         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
-void	still_open(t_cub *cub)
-{
-	int	i;
-	int	j;
-	j = 0;
-	while (cub->map_2d[j])
-	{
-		i = 0;
-		while (cub->map_2d[j][i])
-		{
-		 	if (j != cub->door_row && i != cub->door_index
-				&& cub->map_2d[j][i] == 'x')
-				cub->map_2d[j][i] = 'D';
-			i += 1;
-		}
-		j += 1;
-	}
-}
-
-void	mini_player(t_cub *cub, int x, int y, int size)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < size)
-	{
-		i = 0;
-		while (i < size)
-		{
-			my_mlx_pixel_put(cub, x + i, y + j, 0xff00000);
-			i += 1;
-		}
-		j += 1;
-	}
-}
-
-void	player_newpos(t_cub *cub, int key)
-{
-	if (key == MOVE_FORWARD)
-	{
-		cub->p_x += 3 * cos(cub->angle);
-		cub->p_y += 3 * sin(cub->angle);
-		cub->p_minix = cub->p_x * SCALE_SIZE;
-		cub->p_miniy = cub->p_y * SCALE_SIZE;
-	}
-	if (key == MOVE_BACKWARD)
-	{
-		cub->p_x -= 3 * cos(cub->angle);
-		cub->p_y -= 3 * sin(cub->angle);
-		cub->p_minix = cub->p_x * SCALE_SIZE;
-		cub->p_miniy = cub->p_y * SCALE_SIZE;
-	}
-	if (key == MOVE_LEFT)
-	{
-		cub->p_x += 3 * sin(cub->angle);
-		cub->p_y -= 3 * cos(cub->angle);
-		cub->p_minix = cub->p_x * SCALE_SIZE;
-		cub->p_miniy = cub->p_y * SCALE_SIZE;
-	}
-	if (key == MOVE_RIGHT)
-	{
-		cub->p_x -= 3 * sin(cub->angle);
-		cub->p_y += 3 * cos(cub->angle);
-		cub->p_minix = cub->p_x * SCALE_SIZE;
-		cub->p_miniy = cub->p_y * SCALE_SIZE;
-	}
-}
-
-bool	check_sides(t_cub *cub, int xtmp, int ytmp)
-{
-	double	right_angle;
-	double	left_angle;
-
-	right_angle = set_angle(cub->angle - M_PI / 2);
-	intersections(right_angle, cub);
-	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
-	{
-		cub->p_x = xtmp;
-		cub->p_y = ytmp;
-		return (true);
-	}
-	left_angle = set_angle(cub->angle + M_PI / 2);
-	intersections(left_angle, cub);
-	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
-	{
-		cub->p_x = xtmp;
-		cub->p_y = ytmp;
-		return (true);
-	}
-	return (false);
-}
-
-void move_player(t_cub *cub, int keycode)
+void	move_player(t_cub *cub, int keycode)
 {
 	int		xtmp;
 	int		ytmp;
@@ -102,9 +21,9 @@ void move_player(t_cub *cub, int keycode)
 	ytmp = cub->p_y;
 	player_newpos(cub, keycode);
 	if (check_sides(cub, xtmp, ytmp) == true)
-		return;
+		return ;
 	intersections(cub->angle, cub);
-	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 2)
 	{
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
@@ -120,7 +39,7 @@ void move_player(t_cub *cub, int keycode)
 
 void	beside_wall(t_cub *cub, int keycode)
 {
-	if (cub->d_p_dist >= 0 &&  cub->d_p_dist < 6 && cub->door
+	if (cub->d_p_dist >= 0 && cub->d_p_dist < 6 && cub->door
 		&& keycode == OPEN_DOOR)
 	{
 		cub->door_index = (int)floor(cub->door_x) / S_SIZE;
@@ -176,7 +95,8 @@ void	draw(t_cub *cub)
 	else
 		zoomed_map(cub, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
-	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[cub->n_of_img],\
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, \
+	cub->gun_sprite[cub->n_of_img], \
 	(WIN_WIDTH / 2) - (166 / 2), WIN_HEIGTH - 122);
 }
 
@@ -199,19 +119,4 @@ void	movement(int keycode, t_cub *cub)
 		exit(0);
 	if (keycode == CTRL)
 		cub->all_map = 1;
-}
-
-int ft_move(int keycode, t_cub *cub)
-{
-	beside_wall(cub, keycode);
-	movement(keycode, cub);
-	// if (keycode == CTRL)
-	// {
-
-	// 	draw_mini_map(cub, 0);
-	// 	mini_player(cub, cub->p_minix, cub->p_miniy, 3);
-	// }
-	// else
-	// 	zoomed_map(cub, 0, 0);
-	return (0);
 }

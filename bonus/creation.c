@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   creation.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 11:49:47 by isel-har          #+#    #+#             */
+/*   Updated: 2023/06/23 11:50:54 by isel-har         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 void	put_player(t_cub *cub)
 {
-	cub->p_x *= S_SIZE ;
+	cub->p_x *= S_SIZE;
 	cub->p_y *= S_SIZE;
 	cub->p_x += S_SIZE / 2;
 	cub->p_y += S_SIZE / 2;
@@ -65,18 +77,19 @@ void	creation(t_cub *cub)
 	init_keys(cub);
 	cub->w_ptr = mlx_new_window(cub->m_ptr, WIN_WIDTH, WIN_HEIGTH, "cub3d");
 	cub->data->img = mlx_new_image(cub->m_ptr, WIN_WIDTH, WIN_HEIGTH);
-	cub->data->addr = mlx_get_data_addr(cub->data->img, &cub->data->bits_per_pixel \
-	, &cub->data->line_length, &cub->data->endian);
+	cub->data->addr = mlx_get_data_addr(cub->data->img, \
+	&cub->data->bits_per_pixel, \
+	&cub->data->line_length, &cub->data->endian);
 	put_surfaces(cub);
 	put_player(cub);
 	mlx_hook(cub->w_ptr, 2, 0, ft_move, cub);
 	mlx_hook(cub->w_ptr, 3, 0, key_up, cub);
-	mlx_hook(cub->w_ptr, 6, 0,  &mouse, cub);
+	mlx_hook(cub->w_ptr, 6, 0, &mouse, cub);
 	mlx_hook(cub->w_ptr, 17, 0, ft_close, cub);
 	mlx_mouse_hook(cub->w_ptr, gun_key, cub);
 	mlx_loop_hook(cub->m_ptr, keys, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
-	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[0],\
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[0], \
 	(WIN_WIDTH / 2) - (166 / 2), WIN_HEIGTH - 122);
 	mlx_loop(cub->m_ptr);
 }

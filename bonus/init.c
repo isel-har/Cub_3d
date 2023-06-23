@@ -6,11 +6,18 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:20:16 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/22 17:34:18 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:22:54 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
+
+int	ft_move(int keycode, t_cub *cub)
+{
+	beside_wall(cub, keycode);
+	movement(keycode, cub);
+	return (0);
+}
 
 void	init_keys(t_cub *cub)
 {
@@ -43,6 +50,7 @@ void	init_values(t_cub *cub)
 	cub->x_map = 0;
 	cub->door_index = 0;
 	cub->door_row = 0;
+	cub->fov = 60 * (M_PI / 180);
 	cub->all_map = 0;
 	cub->data = ft_malloc(sizeof(t_data));
 	while (cub->map_2d[cub->y_map])

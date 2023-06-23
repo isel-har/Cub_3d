@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 18:40:28 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/21 11:48:20 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:21:51 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ void	cast_all_rays(t_cub *cub)
 	int		i;
 	double	rayangle;
 
-	rayangle = cub->angle - (FOV_AGL / 2);
+	rayangle = cub->angle - (cub->fov / 2);
 	rayangle = set_angle(rayangle);
 	i = 0;
 	while (i < NUM_RAYS)
 	{
 		intersections(rayangle, cub);
-		rayangle += FOV_AGL / (double)NUM_RAYS;
+		rayangle += cub->fov / (double)NUM_RAYS;
 		rayangle = set_angle(rayangle);
 		render_walls(rayangle, cub, i);
 		i += 1;

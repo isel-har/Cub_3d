@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub2.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 11:55:55 by isel-har          #+#    #+#             */
+/*   Updated: 2023/06/23 12:37:00 by isel-har         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB2_H
 # define CUB2_H
 
@@ -11,9 +23,8 @@ void	free_2d(char **str);
 void	free_3d(char ***s);
 void	release_all(t_cub *cub, char f);
 int		size_map(char **str);
-void    check_elements(char ***map, t_cub *cub);
-int		whitespaces(char c);
-void    exit_error(t_cub *cub, char step);
+void	check_elements(char ***map, t_cub *cub);
+void	exit_error(t_cub *cub, char step);
 void	check_map(char **map, t_cub *cub, int i);
 char	*ft_itoa(int n);
 int		ft_atoi(char *str);
@@ -24,22 +35,23 @@ void	creation(t_cub *cub);
 void	put_player(t_cub *cub);
 int		ft_move(int keycode, t_cub *cub);
 bool	right_side(double rayangle);
-int	    player_up(double angle);
-int	    is_wall(t_cub *cub, double x, double y);
-void    horizontal_intersection(double rayangle, t_cub *cub);
+int		player_up(double angle);
+int		is_wall(t_cub *cub, double x, double y);
+void	horizontal_intersection(double rayangle, t_cub *cub);
 void	vertical_intersection(double rayangle, t_cub *cub);
 void	first_horizontal_intersection(double rayangle, t_cub *cub);
 void	next_horizontal_intersection(double rayangle, t_cub *cub);
 void	first_ver_intersect(double rayangle, t_cub *cub);
 void	next_ver_intersect(double rayangle, t_cub *cub);
-int	    keys(t_cub *cub);
+int		keys(t_cub *cub);
 int		key_up(int keycode, t_cub *cub);
 void	init_keys(t_cub *cub);
 void	player_newpos(t_cub *cub, int key);
 bool	check_sides(t_cub *cub, int xtmp, int ytmp);
-void    gun_img(t_cub *cub);
-int   	mouse(int x, int y, t_cub *cub);
+void	gun_img(t_cub *cub);
+int		mouse(int x, int y, t_cub *cub);
 void	gun_sprite(t_cub *cub);
-int	    gun_key(int key, int x, int y, t_cub *cub);
-int	    gun_animation(t_cub *cub);
+int		gun_key(int key, int x, int y, t_cub *cub);
+int		gun_animation(t_cub *cub);
+
 #endif

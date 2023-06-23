@@ -1,45 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   objects.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 11:59:34 by isel-har          #+#    #+#             */
+/*   Updated: 2023/06/23 12:22:03 by isel-har         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define WIN_WIDTH	1024
-# define WIN_HEIGTH 800
-# define NUM_RAYS	WIN_WIDTH
-# define S_SIZE		32
-# define FOV_AGL  (60 * (M_PI / 180))
-# define MEM_ERR "memory allocation error\n"
-# define IMG_ERR "Invalid file path\n"
-# define NORTH	'N'
-# define SOUTH	'S'
-# define EAST	'E'
-# define WEST	'W'
-# define DOR	'D'
-# define RIGHT_ROTATION 124
-# define LEFT_ROTATION 123
-# define MOVE_FORWARD 13
-# define MOVE_BACKWARD 1
-# define MOVE_RIGHT 2
-# define MOVE_LEFT 0
-# define ESC 53
-# define SCALE_SIZE 0.25
-# define OPEN_DOOR 49
-# define CTRL	256
-//z  122
-//q  113
-//s  115
-//d  100
-//esc  65307
-//left   65361
-//right   65363
-//mac-------------------
-// # define RIGHT_ROTATION 124
-// # define LEFT_ROTATION 123
-// # define MOVE_FORWARD 13
-// # define MOVE_BACKWARD 1
-// # define MOVE_RIGHT 2
-// # define MOVE_LEFT 0
-// # define ESC 53
-// # define SCALE_SIZE 0.3
-// # define OPEN_DOOR 49
+# define WIN_WIDTH 		1024
+# define WIN_HEIGTH 	800
+# define NUM_RAYS 		WIN_WIDTH
+# define S_SIZE			32
+# define MEM_ERR		"memory allocation error\n"
+# define IMG_ERR		"Invalid file path\n"
+# define NORTH			'N'
+# define SOUTH			'S'
+# define EAST			'E'
+# define WEST			'W'
+# define DOR			'D'
+# define RIGHT_ROTATION	124
+# define LEFT_ROTATION	123
+# define MOVE_FORWARD 	13
+# define MOVE_BACKWARD	1
+# define MOVE_RIGHT		2
+# define MOVE_LEFT		0
+# define ESC 			53
+# define SCALE_SIZE		0.25
+# define OPEN_DOOR		49
+# define CTRL			256
+
 typedef struct s_color
 {
 	int	r;
@@ -47,29 +42,16 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
-typedef struct	s_ray
-{
-	int		dx;
-	int 	dy;
-	double	nxtx;
-	double	nxty;
-	int		steps;
-	float	Xinc;
-	float	Yinc;
-	float 	X;
-	float	Y;
-}	t_ray;
-
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}   t_data;
+}	t_data;
 
-typedef struct	s_tx
+typedef struct s_tx
 {
 	void			*ptr;
 	unsigned int	*data;
@@ -80,13 +62,14 @@ typedef struct	s_tx
 	int				height;
 	char			*type;
 	int				sprite_x;
-	int				sprite_yY;
+	int				sprite_y;
 }	t_tx;
 
 typedef struct s_cub
 {
 	double	p_x;
 	double	p_y;
+	double	fov;
 	float	pdx;
 	float	pdy;
 	int		x_map;
@@ -133,11 +116,11 @@ typedef struct s_cub
 	double	p_minix;
 	double	p_miniy;
 	int		calc_x;
-	int 	calc_y;
+	int		calc_y;
 	int		door_index;
 	int		door_row;
-	int     ROT_TO_RIGHT;
-    int     ROT_TO_LEFT;
+	int		rot_to_right;
+	int		rot_to_left;
 	double	x_offset;
 	void	**gun_sprite;
 	int		n_of_img;

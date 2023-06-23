@@ -2,7 +2,7 @@
 
 void    mouse_rotate(t_cub *cub)
 {
-    if (cub->ROT_TO_RIGHT)
+    if (cub->rot_to_right)
     {
         if (cub->angle >= 355 * (M_PI / 180))
         {
@@ -14,7 +14,7 @@ void    mouse_rotate(t_cub *cub)
         cub->angle = cub->angle * (M_PI / 180);
 
     }
-    else if (cub->ROT_TO_LEFT)
+    else if (cub->rot_to_left)
     {
         if (cub->angle <= 0)
         {
@@ -33,22 +33,22 @@ int    mouse(int x, int y, t_cub *cub)
 {
 	mlx_mouse_hide();
     (void)y;
-	cub->ROT_TO_RIGHT = 0;
-    cub->ROT_TO_LEFT = 0;
+	cub->rot_to_right = 0;
+    cub->rot_to_left = 0;
 	if (x == WIN_WIDTH / 2)
 		return (0);
     if (x > WIN_WIDTH / 2)
     {
-		cub->ROT_TO_RIGHT = 1;
+		cub->rot_to_right = 1;
 		mlx_mouse_move(cub->w_ptr, WIN_WIDTH / 2, WIN_HEIGTH / 2);
     }
     else if (x < WIN_WIDTH / 2)
     {
-		cub->ROT_TO_LEFT = 1;
+		cub->rot_to_left = 1;
 		mlx_mouse_move(cub->w_ptr, WIN_WIDTH / 2, WIN_HEIGTH / 2);
     }
     mouse_rotate(cub);
-    cub->ROT_TO_RIGHT = 0;
-    cub->ROT_TO_LEFT = 0;
+    cub->rot_to_right = 0;
+    cub->rot_to_left = 0;
     return (0);
 }
