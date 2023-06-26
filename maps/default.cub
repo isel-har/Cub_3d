@@ -1,10 +1,10 @@
-NO textures/texture3.xpm
-SO textures/texture3.xpm
-WE textures/texture3.xpm
-EA textures/texture3.xpm
+NO textures/LAB_4A.xpm
+WE textures/LAB_5B.xpm
+SO textures/LAB_4A.xpm
+EA textures/LAB_5B.xpm
 
-F 90,90,90
-C 128,128,128
+F 27,32,32
+C 75,85,95  
 
 
 111111111111111111111
