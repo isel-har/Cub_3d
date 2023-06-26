@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:07:54 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/20 17:07:55 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:38:37 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(int ac, char **av)
 	cub = ft_malloc(sizeof(t_cub));
 	pars_cub(cub, av[1]);
 	check_walls2(cub->map_2d, cub);
+	check_prev(cub->map_2d, cub);
 	creation(cub);
 	return (0);
 }

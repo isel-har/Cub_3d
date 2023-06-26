@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:55:55 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/23 12:37:00 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:38:13 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int		mouse(int x, int y, t_cub *cub);
 void	gun_sprite(t_cub *cub);
 int		gun_key(int key, int x, int y, t_cub *cub);
 int		gun_animation(t_cub *cub);
-
+void	check_prev(char **map, t_cub *cub);
 #endif
