@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:15:23 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/23 12:22:25 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:34:55 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,8 @@ void	put_rect(double rayangle, int x, t_cub *cub, double plan_height)
 
 void	render_walls(double rayangle, t_cub *cub, int i)
 {
-	double	plan_dist;
 	double	raydistance;
-	double	proj_plan_h;
+	double	screen_wall;
 	double	newang;
 
 	newang = cub->angle - rayangle;
@@ -84,7 +83,6 @@ void	render_walls(double rayangle, t_cub *cub, int i)
 	* cos(newang);
 	if (round(raydistance) == 0)
 		raydistance = 1;
-	plan_dist = (WIN_WIDTH / 2) / tan(cub->fov / 2);
-	proj_plan_h = (S_SIZE / raydistance) * plan_dist;
-	put_rect(rayangle, i, cub, proj_plan_h);
+	screen_wall = WIN_HEIGTH * S_SIZE / raydistance;
+	put_rect(rayangle, i, cub, screen_wall);
 }
