@@ -6,7 +6,7 @@
 /*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:07:18 by isel-har          #+#    #+#             */
-/*   Updated: 2023/06/20 17:35:16 by isel-har         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:34:29 by isel-har         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,23 @@ int	check_sp(char **s, int i, int j)
 	return (0);
 }
 
-void	skip_spaces(char *s, int *j, char f)
+int	til_space(char **s, int i, int l, char c)
 {
-	if (f == 'f')
+	int	j;
+
+	if (c != 'r')
 	{
-		while (s[*j] == ' ' && s[*j])
-			*j += 1;
+		j = 0;
+		while (s[i][j] == ' ')
+			j++;
 	}
 	else
 	{
-		*j -= 1;
-		while (s[*j] == ' ')
-			*j -= 1;
+		j = l - 1;
+		while (s[i][j] == ' ')
+			j--;
 	}
+	return (j);
 }
 
 void	check_walls2(char **s, t_cub *cub)
@@ -79,11 +83,10 @@ void	check_walls2(char **s, t_cub *cub)
 	int	i;
 	int	j;
 
-	i = -1;
-	while (s[++i])
+	i = 0;
+	while (s[i])
 	{
-		j = 0;
-		skip_spaces(s[i], &j, 'f');
+		j = til_space(s, i, 0, 'a');
 		if (s[i][j] != '1')
 			exit_error(cub, 3);
 		j = 0;
@@ -92,13 +95,36 @@ void	check_walls2(char **s, t_cub *cub)
 			if (i == 0 && s[i][j] != ' ' && s[i][j] != '1')
 				exit_error(cub, 3);
 			if (check_sp(s, i, j) == -1)
-				exit_error(cub, 0);
+				exit_error(cub, 3);
 			if (!s[i + 1] && s[i][j] != ' ' && s[i][j] != '1')
 				exit_error(cub, 3);
 			j++;
 		}
-		skip_spaces(s[i], &j, 'b');
+		j = til_space(s, i, j, 'r');
 		if (s[i][j] != '1')
 			exit_error(cub, 3);
+		i++;
+	}
+}
+
+void	check_prev(char **map, t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			if (map[j][i] == '0')
+			{
+				if (j > 0 && i + 1 > (int)ft_strlen(map[j - 1]))
+					exit_error(cub, 3);
+			}
+			i++;
+		}
+		j++;
 	}
 }
